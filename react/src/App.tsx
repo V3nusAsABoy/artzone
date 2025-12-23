@@ -9,6 +9,7 @@ import Drawings from './components/drawings';
 import type Art from './types/art';
 import Loginoptions from './components/loginoptions';
 import type user from './types/user';
+import Sidebar from './components/sidebar';
 
 function App() {
 
@@ -48,15 +49,18 @@ function App() {
     }
 
   return (
-    <div className="body">
-      <Loginoptions username={userInfo.username} />
-      <Logos />
-      <Navbar setHome={setHome} setAbout = {setAbout} setArtists={setArtists} setDrawings={setDrawings}/>
-      {home && <Home />}
-      {about && <About />}
-      {artists && <Artists />}
-      {drawings && <Drawings drawings={art} admin={admin} setDrawings={setArt} />}
-    </div>
+    <>
+    {drawings && <Sidebar drawings={art} />}
+      <div className={`body ${drawings ? 'forTheGallery' : ''}`}>
+        <Loginoptions username={userInfo.username} />
+        <Logos />
+        <Navbar setHome={setHome} setAbout = {setAbout} setArtists={setArtists} setDrawings={setDrawings}/>
+        {home && <Home />}
+        {about && <About />}
+        {artists && <Artists />}
+        {drawings && <Drawings drawings={art} admin={admin} setDrawings={setArt} />}
+      </div>
+    </>
   )
 }
 
