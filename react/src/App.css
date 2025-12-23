@@ -127,6 +127,7 @@ h1{
 
 #home img{
     align-self: end;
+    width:20em;
 }
 
 #about h1{
@@ -272,6 +273,10 @@ h1{
         background-color: #edededaf;
         padding-bottom: 12.5em;
         width:100%;
+    }
+
+    #home img{
+        width:40%;
     }
 
     .register-form{
