@@ -4,9 +4,12 @@
 #logos{
     margin:auto;
     max-width: fit-content;
-    margin-bottom:2em; /* suspect */
-    display:grid;
-    grid-template-columns: repeat(8,1fr);
+    display:flex;
+    flex-direction: row;
+    gap:2em;
+    align-items: center;
+    justify-content: center;
+    
 }
 
 h1, h2, h3, h4, h5, h6, button{
@@ -40,8 +43,9 @@ body{
     background-color: #f500c4;
     background-attachment: fixed;
     background-size:cover;
+    margin:0;
+    padding:0;
 }
-
 #root{
     margin:0;
     padding:0;
@@ -57,6 +61,7 @@ body{
     display:flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-bottom:0;
 }
 
 #login-options{
@@ -92,15 +97,31 @@ body{
     object-fit: cover;
 }
 
+h1{
+    margin:0;
+}
+
 
 .body{
     padding:3em;
     background-color:#ededed;
-    max-width:50em;
-    box-shadow: -0.5em -0.5em 1em rgba(146, 146, 146, 0.75),  0.5em 0.5em 1em rgb(146, 146, 146, 0.75);
+    width:60%;
+    /*box-shadow: -0.5em -0.5em 1em rgba(146, 146, 146, 0.75),  0.5em 0.5em 1em rgb(146, 146, 146, 0.75);*/
     margin-right: auto;
     margin-left: auto;
     top:0%;
+    height:100%;
+    position:relative;
+    min-height:100vh;
+}
+
+#home{
+    display:flex;
+    flex-direction: column;
+}
+
+#home img{
+    align-self: end;
 }
 
 #about h1{
