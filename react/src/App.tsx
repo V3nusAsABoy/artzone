@@ -7,8 +7,8 @@ import Artists from './components/artists';
 import Navbar from './components/navbar';
 import Drawings from './components/drawings';
 import type Art from './types/art';
-import { UserContext } from './UserContext';
 import Loginoptions from './components/loginoptions';
+import type user from './types/user';
 
 function App() {
 
@@ -17,7 +17,7 @@ function App() {
   const [artists, setArtists] = useState(false);
   const [drawings, setDrawings] = useState(false);
   const [art, setArt] = useState<Art[]>([]);
-  const [userInfo, setUserInfo] = useState<{}>(UserContext);
+  const [userInfo, setUserInfo] = useState<user>({} as user);
   const [admin, setAdmin] = useState(false);
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-export default function loginoptions ({username} : {username: Boolean}) {
+export default function loginoptions ({username} : {username: String | undefined}) {
     return(
         <>
             <div id="login-options">
