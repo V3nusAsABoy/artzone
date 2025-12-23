@@ -3,6 +3,7 @@ import {useState} from 'react';
 import {Navigate} from 'react-router-dom';
 
 export default function Login(){
+    const url: String = 'http://localhost:4000/';
     const [formData, setFormData] = useState({
         username: "",
         password: ""
@@ -50,7 +51,7 @@ export default function Login(){
             const data = new FormData();
             data.set('username', formData.username);
             data.set('password', formData.password);
-            const response = await fetch('http://localhost:4000/login', {
+            const response = await fetch(`${url}login`, {
                 method: 'POST',
                 body: JSON.stringify({username: formData.username, password: formData.password}),
                 headers: {'Content-Type': 'application/json'},

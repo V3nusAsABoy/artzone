@@ -20,16 +20,17 @@ function App() {
   const [art, setArt] = useState<Art[]>([]);
   const [userInfo, setUserInfo] = useState<user>({} as user);
   const [admin, setAdmin] = useState(false);
+  const url: string = 'http://localhost:4000/';
 
   useEffect(() => {
-    fetch('http://localhost:4000/drawings')
+    fetch(`${url}drawings`)
       .then(response => response.json())
       .then(data => setArt(data))
       .catch(error => console.error('Error fetching art data:', error));
   }, []);
 
   useEffect(() => {
-        fetch('http://localhost:4000/profile', {
+        fetch(`${url}profile`, {
             credentials: 'include',
         }).then(response => {
             response.json().then(userInfo => {
@@ -40,7 +41,7 @@ function App() {
     }, []);
   
     async function checkAdmin(){
-        const response =  await fetch('http://localhost:4000/admin', {
+        const response =  await fetch(`${url}admin`, {
             credentials: 'include',
         });
         if(response.ok){
@@ -58,7 +59,7 @@ function App() {
         {home && <Home />}
         {about && <About />}
         {artists && <Artists />}
-        {drawings && <Drawings drawings={art} admin={admin} setDrawings={setArt} />}
+        {drawings && <Drawings drawings={art} admin={admin} setDrawings={setArt} url={url} />}
       </div>
     </>
   )

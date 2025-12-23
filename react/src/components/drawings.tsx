@@ -2,7 +2,7 @@ import {useState} from 'react';
 import type Art from '../types/art';
 import Drawing from './drawing';
 
-export default function drawings({drawings, admin, setDrawings} : {drawings: Art[], admin: boolean, setDrawings: Function}) {
+export default function drawings({drawings, admin, setDrawings, url} : {drawings: Art[], admin: boolean, setDrawings: Function, url: string}) {
     const [formData, setFormData] = useState({
         title: "",
         artist: "",
@@ -21,7 +21,7 @@ export default function drawings({drawings, admin, setDrawings} : {drawings: Art
         data.set('title', formData.title);
         data.set('artist', formData.artist);
         data.set('file', files as Blob);
-        const response = await fetch('http://localhost:4000/drawing', {
+        const response = await fetch(`${url}drawing`, {
             method: 'POST',
             body: data,
     });
@@ -39,7 +39,7 @@ export default function drawings({drawings, admin, setDrawings} : {drawings: Art
         <div id = "gallery">
             <h1>gallery</h1>
             {drawings && drawings.map((artwork, index) => (
-                <Drawing key={index} title={artwork.title} artist={artwork.artist} drawing={artwork.art} setDrawings={setDrawings} admin={admin} id={artwork._id} />
+                <Drawing key={index} title={artwork.title} artist={artwork.artist} drawing={artwork.art} setDrawings={setDrawings} admin={admin} id={artwork._id} url={url}/>
             ))}
             {admin &&
             <form onSubmit={newDrawing} className="register-form" style={{marginTop:"1em"}}>
