@@ -111,8 +111,12 @@ app.post('/logout', (req,res) => {
          httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-        path: '/'
+        path: '/',
+        expires: new Date(0),
+        maxAge: 0
     });
+
+    res.cookie('token', '', clearCookieSettings);
 
     // Clear JWT cookie with same settings it was set with
     res.clearCookie('token', clearCookieSettings());
