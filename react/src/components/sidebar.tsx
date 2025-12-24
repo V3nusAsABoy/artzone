@@ -7,7 +7,7 @@ export default function sidebar({drawings} : {drawings: Art[]}){
                 <div>
                     <a href="#logos">Back to top</a>
                 </div>
-                {drawings && drawings.map((artwork, index) => (
+                {drawings && drawings.map((artwork) => (
                     <div>
                         <a href={`#${artwork._id}`}>{artwork.title}</a>
                     </div>
