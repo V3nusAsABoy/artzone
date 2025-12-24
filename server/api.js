@@ -27,9 +27,18 @@ app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
+app.set('trust proxy', 1);
+
 const dbstore = new dbsession({
     uri: process.env.MONGOURL,
     collection: 'sessions'
+});
+
+const getCookieSettings = () => ({
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
+    maxAge: 1000 * 60 * 60 * 24,
 });
 
 app.use(session({
@@ -37,11 +46,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     store: dbstore,
-    cookie: { maxAge: 1000 * 60 * 60 * 24,
-        sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
-        httpOnly: true,
-        expires: 1000 * 60 * 60 * 24,
-        domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined}
+    proxy: true,
+    cookie: getCookieSettings()
 }));
 
 app.post('/register', upload.none(), check('username').trim().escape(), async (req, res) => {
@@ -59,11 +65,10 @@ app.post('/register', upload.none(), check('username').trim().escape(), async (r
     req.session.admin = userDoc.admin;
     jwt.sign({username,id:userDoc.id},process.env.SECRET,{},(err,token) => {
         if(err) throw err;
-        res.cookie('token', token, {httpOnly:true, secure: process.env.NODE_ENV, sameSite: 'Strict'}).json({
+        res.cookie('token', token, getCookieSettings()).json({
             id:userDoc._id,
             username
         });
-        res.json(userDoc);
     });
     } catch(e) {
         res.status(400).json(e);
@@ -89,7 +94,7 @@ app.post('/login', check('username').trim().escape(), async (req,res) => {
         req.session.admin = userDoc.admin;
         jwt.sign({username,id:userDoc._id}, process.env.SECRET, {}, (err,token) => {
             if (err) throw err;
-            res.cookie('token', token, { httpOnly: true, secure: process.env.NODE_ENV, sameSite: 'Strict' }).json({
+            res.cookie('token', token, getCookieSettings()).json({
                 id:userDoc._id,
                 username
             });
