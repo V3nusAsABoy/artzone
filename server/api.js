@@ -38,10 +38,10 @@ app.use(session({
     saveUninitialized: false,
     store: dbstore,
     cookie: { maxAge: 1000 * 60 * 60 * 24,
-        secure: process.env.NODE_ENV === 'production',
         sameSite: 'Strict', 
         httpOnly: true,
-        expires: 1000 * 60 * 60 * 24}
+        expires: 1000 * 60 * 60 * 24,
+        domain: process.env.NODE_ENV === 'production' ? '.onrender.com' : undefined}
 }));
 
 app.post('/register', upload.none(), check('username').trim().escape(), async (req, res) => {
