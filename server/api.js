@@ -120,6 +120,19 @@ app.get('/artists', async (req, res) => {
     res.json(await Artist.find());
 });
 
+app.post('/description', check('description').trim().escape(), async (req, res) => {
+   const description = req.body;
+   const descriptionDoc = await Description.create({
+        description: description
+   });
+
+   res.json(descriptionDoc);
+});
+
+app.get('/description', async (req, res) => {
+    res.json(await Description.find());
+})
+
 
 app.post('/logout', (req, res) => {
     console.log('🚨 LOGOUT CALLED - Current cookies:', Object.keys(req.cookies));
