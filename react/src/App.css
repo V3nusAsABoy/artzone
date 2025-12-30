@@ -200,6 +200,13 @@ h1{
     overflow:hidden;
 }
 
+#artists textarea{
+    width: 80%;
+    height: 20%;
+    font-family: 'Shadows Into Light';
+    font-size: 1.5em;
+}
+
 #gallery-sidebar{
     left:0px;
     width: 20em;

@@ -67,7 +67,7 @@ function App() {
         <Navbar setHome={setHome} setAbout = {setAbout} setArtists={setArtists} setDrawings={setDrawings}/>
         {home && <Home />}
         {about && <About />}
-        {artists && <Artists admin={admin} artists={artistsDescs}/>}
+        {artists && <Artists admin={admin} artists={artistsDescs} setArtists={setArtistDescs} url={url}/>}
         {drawings && <Drawings drawings={art} admin={admin} setDrawings={setArt} url={url} />}
       </div>
     </>

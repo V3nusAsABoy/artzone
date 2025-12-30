@@ -57,9 +57,6 @@ export default function Register(){
             }));
         }
         if(Object.values(errors).every(error => error === false)){
-            const data = new FormData();
-            data.set('username', formData.username);
-            data.set('password', formData.password);
             const response = await fetch(`${url}register`, {
                 method: 'POST',
                 body: JSON.stringify({username: formData.username, password: formData.password}),
