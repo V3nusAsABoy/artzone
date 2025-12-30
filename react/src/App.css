@@ -207,6 +207,11 @@ h1{
     font-size: 1.5em;
 }
 
+#about textarea{
+    width:99%;
+    height:10em;
+}
+
 #gallery-sidebar{
     left:0px;
     width: 20em;
@@ -316,6 +321,10 @@ h1{
 
     h1{
         text-align: center;
+    }
+
+    #about img{
+        transform: scale(0.75);
     }
 
 }
