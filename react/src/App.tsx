@@ -66,7 +66,7 @@ function App() {
         <Logos />
         <Navbar setHome={setHome} setAbout = {setAbout} setArtists={setArtists} setDrawings={setDrawings}/>
         {home && <Home />}
-        {about && <About />}
+        {about && <About admin={admin}/>}
         {artists && <Artists admin={admin} artists={artistsDescs} setArtists={setArtistDescs} url={url}/>}
         {drawings && <Drawings drawings={art} admin={admin} setDrawings={setArt} url={url} />}
       </div>
