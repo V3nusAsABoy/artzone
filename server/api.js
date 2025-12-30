@@ -13,6 +13,7 @@ const session = require('express-session');
 const dbsession = require('connect-mongodb-session')(session);
 const jwt = require('jsonwebtoken');
 const User = require('./dbmodules/User');
+const Artist = require('./dbmodules/artist');
 const cookieParser = require('cookie-parser');
 
 const salt = bcrypt.genSaltSync(10);
@@ -105,26 +106,20 @@ app.post('/login', check('username').trim().escape(), async (req,res) => {
 
 });
 
-app.get('/cookie-check', (req, res) => {
-    console.log('=== COOKIE CHECK ===');
-    console.log('All cookies received:', req.cookies);
-    console.log('Token exists?', !!req.cookies.token);
-    console.log('Token value length:', req.cookies.token ? req.cookies.token.length : 0);
-    console.log('Environment:', process.env.NODE_ENV);
-    
-    res.json({
-        cookies: Object.keys(req.cookies),
-        hasToken: !!req.cookies.token,
-        tokenPreview: req.cookies.token ? req.cookies.token.substring(0, 20) + '...' : null,
-        tokenLength: req.cookies.token ? req.cookies.token.length : 0,
-        sessionId: req.sessionID,
-        sessionExists: !!req.sessionID,
-        headers: {
-            origin: req.headers.origin,
-            'user-agent': req.headers['user-agent']
-        }
+app.post('/artist', check('name').trim().escape(), check('description').trim().escape(), async (req, res) => {
+    const {name,description} = req.body;
+    const artistDoc = await Artist.create({
+        name: name,
+        description: description
     });
+
+    res.json(artistDoc);
 });
+
+app.get('/artists', async (req, res) => {
+    res.json(await Artist.find());
+});
+
 
 app.post('/logout', (req, res) => {
     console.log('🚨 LOGOUT CALLED - Current cookies:', Object.keys(req.cookies));
