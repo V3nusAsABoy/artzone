@@ -41,6 +41,12 @@ export default function drawings({drawings, admin, setDrawings, url} : {drawings
             {drawings && drawings.map((artwork, index) => (
                 <Drawing key={index} title={artwork.title} artist={artwork.artist} drawing={artwork.art} setDrawings={setDrawings} admin={admin} id={artwork._id} url={url}/>
             ))}
+            {drawings.length === 0 &&
+                <>
+                    <hr/>
+                    <h2 style={{marginBottom: "7em", textAlign: "center"}}>No drawings yet!</h2>
+                </>
+            }
             {admin &&
             <form onSubmit={newDrawing} className="register-form" style={{marginTop:"1em"}}>
                 <h2>Add New Drawing</h2>

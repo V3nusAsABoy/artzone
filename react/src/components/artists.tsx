@@ -44,7 +44,7 @@ export default function artists({admin, artists, setArtists, url} : {admin: Bool
             {artists.length === 0 &&
                 <>
                     <hr/>
-                    <h2>No artists yet!</h2>
+                    <h2 style={{marginBottom: "7em"}}>No artists yet!</h2>
                 </>
             }
             {admin && 

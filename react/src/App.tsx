@@ -62,8 +62,8 @@ function App() {
 
   return (
     <>
-    {drawings && <Sidebar drawings={art} />}
-      <div className={`body ${drawings ? 'forTheGallery' : ''}`}>
+    {drawings && art.length > 0 && <Sidebar drawings={art} />}
+      <div className={`body ${drawings && art.length > 0 ? 'forTheGallery' : ''}`}>
         <Loginoptions username={userInfo.username} />
         <Logos />
         <Navbar setHome={setHome} setAbout = {setAbout} setArtists={setArtists} setDrawings={setDrawings}/>
