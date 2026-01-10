@@ -186,17 +186,23 @@ app.post('/drawing', uploadMiddleware.single('file'), async (req,res) => {
     fs.renameSync(path, newPath);
 
     const {title,artist} = req.body;
-    const postDoc = await Drawing.create({
+    const drawingDoc = await Drawing.create({
         title,
         artist,
         art:newPath,
     })
 
-    res.json(postDoc);
+    res.json(drawingDoc);
 });
 
 app.get('/drawings', async(req,res) => {
     res.json(await Drawing.find());
+});
+
+app.get('/drawing/:id', async (req,res) => {
+    const {id} = req.params;
+    const drawingDoc = await Drawing.findById(id);
+    res.json(drawingDoc);
 });
 
 app.delete('/drawing/:id', async (req,res) => {
