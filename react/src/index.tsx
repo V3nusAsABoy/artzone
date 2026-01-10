@@ -4,6 +4,7 @@ import App from './App.tsx';
 import Register from './Register.tsx';
 import Login from './Login.tsx';
 import Logout from './Logout.tsx';
+import DrawingPage from './DrawingPage.tsx';
 
 export default function index(){
     return(
@@ -14,6 +15,7 @@ export default function index(){
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/logout" element={<Logout />} />
+                    <Route path = '/drawing/:id' element = {<DrawingPage />}></Route>
                 </Routes>
             </BrowserRouter>
         </UserContextProvider>
