@@ -48,9 +48,6 @@ export default function Login(){
             }));
         }
         if(Object.values(errors).every(error => error === false)){
-            const data = new FormData();
-            data.set('username', formData.username);
-            data.set('password', formData.password);
             const response = await fetch(`${url}login`, {
                 method: 'POST',
                 body: JSON.stringify({username: formData.username, password: formData.password}),
